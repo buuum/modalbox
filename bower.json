@@ -1,0 +1,20 @@
+{
+  "name": "buuummodal",
+  "homepage": "https://github.com/buuum/modalbox",
+  "description": "Simple modal box",
+  "main": [
+    "modalbox/css/main.css",
+    "modalbox/js/modalbox.min.js"
+  ],
+  "keywords": [
+    "modalbox",
+    "box"
+  ],
+  "authors": [
+    "buuum"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "license": "MIT"
+}

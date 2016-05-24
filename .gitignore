@@ -4,3 +4,4 @@ package.json
 Gruntfile.coffee
 /.sass-cache
 .idea
+demo

@@ -84,7 +84,6 @@ modalbox = (function() {
       loading.append(loader);
       $('.modal__content').append(loading);
       $('.modal__box').find('.modal__overlay').addClass('show_opacity');
-      this.resize();
       this.openmodal();
     } else if (this.options.classload) {
       this.clone = $(this.options.classload).clone();
@@ -184,10 +183,9 @@ modalbox = (function() {
         $('html').css('overflow-y', 'auto');
         $('body').css('overflow-y', 'auto');
       }
+      div.css('left', 0);
       if (sizes.window_w > sizes.width) {
-        div.css('left', (sizes.window_w / 2) - (sizes.width / 2) + "px");
-      } else {
-        div.css('left', 0);
+        div.css('margin', "0 " + ((sizes.window_w / 2) - (sizes.width / 2)) + "px");
       }
       $('.modal__dialog').css('margin', vertical + " auto");
     }
@@ -220,6 +218,7 @@ modalbox = (function() {
       width = obj.find(objsize).outerWidth();
       height = obj.find(objsize).outerHeight();
     } else {
+      obj.css('margin', 0);
       width = obj.outerWidth();
       height = obj.outerHeight();
     }

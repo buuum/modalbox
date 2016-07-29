@@ -108,6 +108,7 @@ modalbox = (function() {
   };
 
   modalbox.prototype.openmodal = function() {
+    this.resize();
     if (this.options.ajax) {
       Api.getData({
         url: this.options.ajax

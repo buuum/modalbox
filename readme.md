@@ -22,6 +22,10 @@ options = {
   closeoverlay: true,
   overlaycolor: '#fff',
   show: 'show_scale',
+  width: false, // percent
+  maxwidth: false, // percent
+  minwidth: false, // percent
+  fixheight: false,
   close: 'hide_scale',
   onclose: function() {}
 }
@@ -78,6 +82,8 @@ modal.ini();
 modal = new modalbox();
 modal.setOptions({
     ajax: '//example.com/path/to/file'
+    width: '50%',
+    fixheight: true
 });
 modal.ini();
 ```

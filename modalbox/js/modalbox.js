@@ -55,6 +55,10 @@ modalbox = (function() {
       classcontainer: false,
       htmlload: false,
       closeoverlay: true,
+      width: false,
+      maxwidth: false,
+      minwidth: false,
+      fixheight: false,
       overlaycolor: '#fff',
       show: 'show_scale',
       close: 'hide_scale',
@@ -108,7 +112,9 @@ modalbox = (function() {
   };
 
   modalbox.prototype.openmodal = function() {
+    this.is_loading = true;
     this.resize();
+    this.is_loading = false;
     if (this.options.ajax) {
       Api.getData({
         url: this.options.ajax
@@ -175,7 +181,7 @@ modalbox = (function() {
       sizes = this.realSizes(div);
       if (sizes.height > sizes.window_h) {
         div.css('top', 0);
-        vertical = "20px";
+        vertical = "0";
         $('html').css('overflow-y', 'hidden');
         $('body').css('overflow-y', 'hidden');
       } else {
@@ -183,6 +189,9 @@ modalbox = (function() {
         vertical = 0;
         $('html').css('overflow-y', 'auto');
         $('body').css('overflow-y', 'auto');
+      }
+      if (this.options.fixheight && !this.is_loading) {
+        div.css('top', 0);
       }
       div.css('left', 0);
       if (sizes.window_w > sizes.width) {
@@ -203,7 +212,7 @@ modalbox = (function() {
   };
 
   modalbox.prototype.realSizes = function(obj, objsize) {
-    var height, height_, height_body, pos, width, width_, width_body;
+    var children, height, height_, height_body, marginbottom, margins, margintop, pos, width, width_, width_body;
     if (objsize == null) {
       objsize = false;
     }
@@ -215,13 +224,36 @@ modalbox = (function() {
     if (pos === 'absolute') {
       obj.css('position', 'relative');
     }
+    if (this.options.width) {
+      obj.css('width', this.options.width);
+    }
+    if (this.options.maxwidth) {
+      obj.css('max-width', this.options.maxwidth);
+    }
+    if (this.options.minwidth) {
+      obj.css('min-width', this.options.minwidth);
+    }
+    children = obj.children();
+    margintop = parseInt(children.first().css('margin-top'));
+    marginbottom = parseInt(children.first().css('margin-bottom'));
+    margins = marginbottom + margintop;
+    margintop = parseInt(children.first().css('padding-top'));
+    marginbottom = parseInt(children.first().css('padding-bottom'));
+    margins += marginbottom + margintop;
+    if (this.options.fixheight && !this.is_loading) {
+      children.first().css('height', height_ - margins);
+    }
     if (objsize) {
       width = obj.find(objsize).outerWidth();
       height = obj.find(objsize).outerHeight();
-    } else {
+    } else if (children.length > 1) {
       obj.css('margin', 0);
       width = obj.outerWidth();
       height = obj.outerHeight();
+    } else {
+      obj.css('margin', 0);
+      width = children.outerWidth();
+      height = children.outerHeight();
     }
     if (pos === 'absolute') {
       obj.css('position', pos);

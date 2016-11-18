@@ -37,8 +37,8 @@ modalbox = (function() {
   modalbox.prototype.close = function() {
     $('.modal__content').removeClass(this.options.show);
     $('.modal__content').addClass(this.options.close);
-    $('.modal__box').find('.modal__overlay').removeClass('show_opacity');
-    $('.modal__box').find('.modal__overlay').addClass('hide_opacity');
+    $('.modal__box').find('.modal__overlay').removeClass('show_buuummodal_opacity');
+    $('.modal__box').find('.modal__overlay').addClass('hide_buuummodal_opacity');
     this.prefixedEventListener($('.modal__content'), 'AnimationEnd', this.onClose);
   };
 
@@ -60,8 +60,8 @@ modalbox = (function() {
       minwidth: false,
       fixheight: false,
       overlaycolor: '#fff',
-      show: 'show_scale',
-      close: 'hide_scale',
+      show: 'show_buuummodal_scale',
+      close: 'hide_buuummodal_scale',
       onclose: function() {}
     };
     this.options = this.merge(this.options, options);
@@ -83,23 +83,23 @@ modalbox = (function() {
       $('body').append(box);
     }
     $('.modal__content').html('');
-    $('.modal__box').find('.modal__overlay').removeClass('hide_opacity');
+    $('.modal__box').find('.modal__overlay').removeClass('hide_buuummodal_opacity');
     if (this.options.ajax) {
       loading.append(loader);
       $('.modal__content').append(loading);
-      $('.modal__box').find('.modal__overlay').addClass('show_opacity');
+      $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
       this.openmodal();
     } else if (this.options.classload) {
       this.clone = $(this.options.classload).clone();
       this.options.classcontainer = this.options.classload;
       this.div = this.clone;
-      $('.modal__box').find('.modal__overlay').addClass('show_opacity');
+      $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
       this.start_modal();
     } else {
       this.clone = $(this.options.htmlload).clone();
       this.options.classcontainer = this.clone.attr('class');
       this.div = this.clone;
-      $('.modal__box').find('.modal__overlay').addClass('show_opacity');
+      $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
       this.start_modal();
     }
   };

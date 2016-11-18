@@ -26,6 +26,7 @@ options = {
   maxwidth: false, // percent
   minwidth: false, // percent
   fixheight: false,
+  hidebodyscroll: true,
   close: 'hide_buuummodal_scale',
   onclose: function() {}
 }

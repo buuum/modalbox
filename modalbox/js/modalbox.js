@@ -35,6 +35,9 @@ modalbox = (function() {
   };
 
   modalbox.prototype.close = function() {
+    if (this.options.hidebodyscroll) {
+      $('body').removeClass('buuummodal_open');
+    }
     $('.modal__content').removeClass(this.options.show);
     $('.modal__content').addClass(this.options.close);
     $('.modal__box').find('.modal__overlay').removeClass('show_buuummodal_opacity');
@@ -60,6 +63,7 @@ modalbox = (function() {
       minwidth: false,
       fixheight: false,
       overlaycolor: '#fff',
+      hidebodyscroll: true,
       show: 'show_buuummodal_scale',
       close: 'hide_buuummodal_scale',
       onclose: function() {}
@@ -84,6 +88,9 @@ modalbox = (function() {
     }
     $('.modal__content').html('');
     $('.modal__box').find('.modal__overlay').removeClass('hide_buuummodal_opacity');
+    if (this.options.hidebodyscroll) {
+      $('body').addClass('buuummodal_open');
+    }
     if (this.options.ajax) {
       loading.append(loader);
       $('.modal__content').append(loading);

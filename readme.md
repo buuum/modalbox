@@ -21,29 +21,29 @@ options = {
   htmlload: false,
   closeoverlay: true,
   overlaycolor: '#fff',
-  show: 'show_scale',
+  show: 'show_buuummodal_scale',
   width: false, // percent
   maxwidth: false, // percent
   minwidth: false, // percent
   fixheight: false,
-  close: 'hide_scale',
+  close: 'hide_buuummodal_scale',
   onclose: function() {}
 }
 ```
 
 ## show functions
 
-* show_scale
-* show_from_left
-* show_from_right
-* show_from_top
-* show_from_bottom
+* show_buuummodal_scale
+* show_buuummodal_from_left
+* show_buuummodal_from_right
+* show_buuummodal_from_top
+* show_buuummodal_from_bottom
 
 ## close functions
 
-* hide_opacity
-* hide_scale
-* hide_top
+* hide_buuummodal_opacity
+* hide_buuummodal_scale
+* hide_buuummodal_top
 
 ## Events
 ### When modal close fire this event

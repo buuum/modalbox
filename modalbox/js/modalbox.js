@@ -27,8 +27,6 @@ modalbox = (function() {
   }
 
   modalbox.prototype.onClose = function(e) {
-    $('html').css('overflow-y', 'auto');
-    $('body').css('overflow-y', 'auto');
     this.prefixedRemoveEventListener($('.modal__content'), 'AnimationEnd', this.onClose);
     $('.modal__box').remove();
     this.options.onclose();
@@ -189,13 +187,9 @@ modalbox = (function() {
       if (sizes.height > sizes.window_h) {
         div.css('top', 0);
         vertical = "0";
-        $('html').css('overflow-y', 'hidden');
-        $('body').css('overflow-y', 'hidden');
       } else {
         div.css('top', (sizes.window_h / 2) - (sizes.height / 2) + "px");
         vertical = 0;
-        $('html').css('overflow-y', 'auto');
-        $('body').css('overflow-y', 'auto');
       }
       if (this.options.fixheight && !this.is_loading) {
         div.css('top', 0);

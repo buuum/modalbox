@@ -5,6 +5,7 @@ modalbox = (function() {
   function modalbox() {
     this.onShow = bind(this.onShow, this);
     this.onClose = bind(this.onClose, this);
+    this.htmloverflowy = $('html').css('overflow-y');
     $(window).resize((function(_this) {
       return function() {
         _this.resize();
@@ -34,6 +35,7 @@ modalbox = (function() {
 
   modalbox.prototype.close = function() {
     if (this.options.hidebodyscroll) {
+      $('html').css('overflow-y', this.htmloverflowy);
       $('body').removeClass('buuummodal_open');
     }
     $('.modal__content').removeClass(this.options.show);
@@ -87,6 +89,7 @@ modalbox = (function() {
     $('.modal__content').html('');
     $('.modal__box').find('.modal__overlay').removeClass('hide_buuummodal_opacity');
     if (this.options.hidebodyscroll) {
+      $('html').css('overflow-y', 'hidden');
       $('body').addClass('buuummodal_open');
     }
     if (this.options.ajax) {
@@ -276,7 +279,9 @@ modalbox = (function() {
       if (!this.pfx[p]) {
         type = type.toLowerCase();
       }
-      element[0].addEventListener(this.pfx[p] + type, callback, false);
+      if (element[0]) {
+        element[0].addEventListener(this.pfx[p] + type, callback, false);
+      }
       p++;
     }
   };

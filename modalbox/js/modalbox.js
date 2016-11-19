@@ -124,32 +124,32 @@ modalbox = (function() {
     this.resize();
     this.is_loading = false;
     if (this.options.ajax) {
-      Api.getData({
-        url: this.options.ajax
-      }, (function(_this) {
-        return function(response, error) {
-          if (!error) {
-            if (response.error) {
-              _this.div = $('<div class="modal_default"></div>');
-              _this.div.html(response.message);
-              _this.start_modal();
-            } else {
-              _this.div = $(response.html);
-              _this.options.classcontainer = _this.div.attr('class');
-              _this.clone = $(_this.div).clone();
-              _this.clone.css('visibility', 'hidden');
-              $('body').append(_this.clone);
-              _this.loaded_imgs = 0;
-              _this.total_imgs = _this.clone.find('img').length;
-              if (_this.total_imgs > 0) {
-                $.each(_this.clone.find('img'), function(i, el) {
-                  $(el).one('load', function() {
-                    _this.imageLoaded();
-                  });
+      $.ajax({
+        method: 'GET',
+        url: this.options.ajax,
+        dataType: "json"
+      }).success((function(_this) {
+        return function(response) {
+          if (response.error) {
+            _this.div = $('<div class="modal_default"></div>');
+            _this.div.html(response.message);
+            _this.start_modal();
+          } else {
+            _this.div = $(response.html);
+            _this.options.classcontainer = _this.div.attr('class');
+            _this.clone = $(_this.div).clone();
+            _this.clone.css('visibility', 'hidden');
+            $('body').append(_this.clone);
+            _this.loaded_imgs = 0;
+            _this.total_imgs = _this.clone.find('img').length;
+            if (_this.total_imgs > 0) {
+              $.each(_this.clone.find('img'), function(i, el) {
+                $(el).one('load', function() {
+                  _this.imageLoaded();
                 });
-              } else {
-                _this.start_modal();
-              }
+              });
+            } else {
+              _this.start_modal();
             }
           }
         };

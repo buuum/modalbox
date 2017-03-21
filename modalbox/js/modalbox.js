@@ -5,27 +5,29 @@ modalbox = (function() {
   function modalbox() {
     this.onShow = bind(this.onShow, this);
     this.onClose = bind(this.onClose, this);
+    this.onCloseOverlay = bind(this.onCloseOverlay, this);
+    this.onCloseClick = bind(this.onCloseClick, this);
     this.htmloverflowy = $('html').css('overflow-y');
     $(window).resize((function(_this) {
       return function() {
         _this.resize();
       };
     })(this));
-    $('body').on('click', ".modal__box__close", (function(_this) {
-      return function(e) {
-        e.preventDefault();
-        _this.close();
-      };
-    })(this));
-    $('body').on('click', ".modal__overlay", (function(_this) {
-      return function(e) {
-        e.preventDefault();
-        if (_this.options.closeoverlay) {
-          _this.close();
-        }
-      };
-    })(this));
+    $('body').one('click', ".modal__box__close", this.onCloseClick);
+    $('body').one('click', ".modal__overlay", this.onCloseOverlay);
   }
+
+  modalbox.prototype.onCloseClick = function(e) {
+    e.preventDefault();
+    this.close();
+  };
+
+  modalbox.prototype.onCloseOverlay = function(e) {
+    e.preventDefault();
+    if (this.options.closeoverlay) {
+      this.close();
+    }
+  };
 
   modalbox.prototype.onClose = function(e) {
     this.prefixedRemoveEventListener($('.modal__content'), 'AnimationEnd', this.onClose);

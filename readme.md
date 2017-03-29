@@ -46,9 +46,17 @@ options = {
 * hide_buuummodal_scale
 * hide_buuummodal_top
 
+## Methods
+### Change content modal
+```js
+animation = false;
+modal.changeContent(html, animation);
+```
+
 ## Events
 ### When modal close fire this event
 * onClose()
+* onLoad()
 
 ## Examples
 

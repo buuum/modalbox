@@ -85,7 +85,22 @@ modalbox = (function() {
       this.options.classcontainer = this.options.classload;
       this.div = this.clone;
       $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
-      this.start_modal();
+      this.clone = $(this.div).clone();
+      this.clone.css('visibility', 'hidden');
+      $('body').append(this.clone);
+      this.loaded_imgs = 0;
+      this.total_imgs = this.clone.find('img').length;
+      if (this.total_imgs > 0) {
+        $.each(this.clone.find('img'), (function(_this) {
+          return function(i, el) {
+            $(el).one('load', function() {
+              _this.imageLoaded();
+            });
+          };
+        })(this));
+      } else {
+        this.start_modal();
+      }
     } else {
       this.clone = $(this.options.htmlload).clone();
       this.options.classcontainer = this.clone.attr('class');

@@ -45,6 +45,7 @@ modalbox = (function() {
       fixheight: false,
       overlaycolor: '#fff',
       hidebodyscroll: true,
+      position: "center",
       show: 'show_buuummodal_scale',
       close: 'hide_buuummodal_scale',
       onClose: function() {},
@@ -228,8 +229,13 @@ modalbox = (function() {
         div.css('top', 0);
         vertical = "0";
       } else {
-        div.css('top', (sizes.window_h / 2) - (sizes.height / 2) + "px");
-        vertical = 0;
+        if (this.options.position === 'top') {
+          div.css('top', 0);
+          vertical = "0";
+        } else {
+          div.css('top', (sizes.window_h / 2) - (sizes.height / 2) + "px");
+          vertical = 0;
+        }
       }
       if (this.options.fixheight && !this.is_loading) {
         div.css('top', 0);

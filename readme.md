@@ -27,6 +27,7 @@ options = {
   minwidth: false, // percent
   fixheight: false,
   hidebodyscroll: true,
+  position: 'top', // default: 'center'
   close: 'hide_buuummodal_scale',
   onclose: function() {}
 }

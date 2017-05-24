@@ -88,6 +88,7 @@ modalbox = (function() {
       $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
       this.clone = $(this.div).clone();
       this.clone.css('visibility', 'hidden');
+      this.clone.find('script').remove();
       $('body').append(this.clone);
       this.loaded_imgs = 0;
       this.total_imgs = this.clone.find('img').length;
@@ -171,6 +172,7 @@ modalbox = (function() {
             _this.options.classcontainer = _this.div.attr('class');
             _this.clone = $(_this.div).clone();
             _this.clone.css('visibility', 'hidden');
+            _this.clone.find('script').remove();
             $('body').append(_this.clone);
             _this.loaded_imgs = 0;
             _this.total_imgs = _this.clone.find('img').length;

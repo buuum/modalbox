@@ -161,7 +161,7 @@ modalbox = (function() {
         method: 'GET',
         url: this.options.ajax,
         dataType: "json"
-      }).success((function(_this) {
+      }).done((function(_this) {
         return function(response) {
           if (response.error) {
             _this.div = $('<div class="modal_default"></div>');

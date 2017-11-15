@@ -14,7 +14,7 @@
     "buuum"
   ],
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=2.0"
   },
   "license": "MIT"
 }

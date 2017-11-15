@@ -8,7 +8,7 @@ ModalBox - Simple modal box
 Buuum is available on Bower and can be installed using:
 
 ```
-bower install buuummodal
+bower install buuummodal#v2
 ```
 
 ### Options

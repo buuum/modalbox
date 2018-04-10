@@ -6,24 +6,30 @@ modalbox = (function() {
     this.onShow = bind(this.onShow, this);
     this.onClose = bind(this.onClose, this);
     this.htmloverflowy = $('html').css('overflow-y');
+    this.num = $('div[class^="modal__box__"]').length + 1;
+    this.dom_modal_box = ".modal__box__" + this.num;
+    this.dom_modal_content = ".modal__content";
+    this.dom_modal_overlay = ".modal__overlay";
   }
 
   modalbox.prototype.onClose = function(e) {
-    this.prefixedRemoveEventListener($('.modal__content'), 'AnimationEnd', this.onClose);
-    $('.modal__box').remove();
+    this.prefixedRemoveEventListener($(this.dom_modal_box).find(this.dom_modal_content), 'AnimationEnd', this.onClose);
+    $(this.dom_modal_box).remove();
     this.options.onClose();
   };
 
   modalbox.prototype.close = function() {
-    if (this.options.hidebodyscroll) {
+    var $length;
+    $length = this.num - 1;
+    if (this.options.hidebodyscroll && $length === 0) {
       $('html').css('overflow-y', this.htmloverflowy);
       $('body').removeClass('buuummodal_open');
     }
-    $('.modal__content').removeClass(this.options.show);
-    $('.modal__content').addClass(this.options.close);
-    $('.modal__box').find('.modal__overlay').removeClass('show_buuummodal_opacity');
-    $('.modal__box').find('.modal__overlay').addClass('hide_buuummodal_opacity');
-    this.prefixedEventListener($('.modal__content'), 'AnimationEnd', this.onClose);
+    $(this.dom_modal_box).find(this.dom_modal_content).removeClass(this.options.show);
+    $(this.dom_modal_box).find(this.dom_modal_content).addClass(this.options.close);
+    $(this.dom_modal_box).find(this.dom_modal_overlay).removeClass('show_buuummodal_opacity');
+    $(this.dom_modal_box).find(this.dom_modal_overlay).addClass('hide_buuummodal_opacity');
+    this.prefixedEventListener($(this.dom_modal_box).find(this.dom_modal_content), 'AnimationEnd', this.onClose);
   };
 
   modalbox.prototype.setOptions = function(options) {
@@ -56,36 +62,41 @@ modalbox = (function() {
 
   modalbox.prototype.ini = function() {
     var box, content, dialog, loader, loading, overlay;
-    box = $('<div class="modal__box" />');
-    overlay = $('<div class="modal__overlay" />');
+    box = "<div class='" + (this.dom_modal_box.substr(1)) + "' />";
+    box = $(box);
+    overlay = "<div class='" + (this.dom_modal_overlay.substr(1)) + "' />";
+    overlay = $(overlay);
+    overlay.css('z-index', 1000 + this.num);
     overlay.css('background-color', this.options.overlaycolor);
     dialog = $('<div class="modal__dialog" />');
-    content = $('<div class="modal__content" />');
+    content = "<div class='" + (this.dom_modal_content.substr(1)) + "' />";
+    content = $(content);
+    content.css('z-index', 1000 + this.num + 1);
     loading = $('<div class="modal__loading" />');
     loader = $('<div class="spinner spinner-bounce-middle" />');
     this.iniEvents();
-    if ($('.modal__box').length <= 0) {
+    if ($(this.dom_modal_box).length <= 0) {
       dialog.append(content);
       box.append(overlay);
       box.append(dialog);
       $('body').append(box);
     }
-    $('.modal__content').html('');
-    $('.modal__box').find('.modal__overlay').removeClass('hide_buuummodal_opacity');
+    $(this.dom_modal_content).html('');
+    $(this.dom_modal_box).find(this.dom_modal_overlay).removeClass('hide_buuummodal_opacity');
     if (this.options.hidebodyscroll) {
       $('html').css('overflow-y', 'hidden');
       $('body').addClass('buuummodal_open');
     }
     if (this.options.ajax) {
       loading.append(loader);
-      $('.modal__content').append(loading);
-      $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
+      $(this.dom_modal_content).append(loading);
+      $(this.dom_modal_box).find(this.dom_modal_overlay).addClass('show_buuummodal_opacity');
       this.openmodal();
     } else if (this.options.classload) {
       this.clone = $(this.options.classload).clone();
       this.options.classcontainer = this.options.classload;
       this.div = this.clone;
-      $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
+      $(this.dom_modal_box).find(this.dom_modal_overlay).addClass('show_buuummodal_opacity');
       this.clone = $(this.div).clone();
       this.clone.css('visibility', 'hidden');
       this.clone.find('script').remove();
@@ -107,7 +118,7 @@ modalbox = (function() {
       this.clone = $(this.options.htmlload).clone();
       this.options.classcontainer = this.clone.attr('class');
       this.div = this.clone;
-      $('.modal__box').find('.modal__overlay').addClass('show_buuummodal_opacity');
+      $(this.dom_modal_box).find(this.dom_modal_overlay).addClass('show_buuummodal_opacity');
       this.start_modal();
     }
   };
@@ -116,7 +127,7 @@ modalbox = (function() {
     if (animation == null) {
       animation = false;
     }
-    $('.modal__content').html('');
+    $(this.dom_modal_content).html('');
     this.clone = $(html).clone();
     this.options.classcontainer = this.clone.attr('class');
     this.div = this.clone;
@@ -135,8 +146,9 @@ modalbox = (function() {
         _this.close();
       };
     })(this));
-    return $('body').one('click', ".modal__overlay", (function(_this) {
+    return $('body').one('click', this.dom_modal_box + " " + this.dom_modal_overlay, (function(_this) {
       return function(e) {
+        console.log(_this.num);
         e.preventDefault();
         if (_this.options.closeoverlay) {
           _this.close();
@@ -201,18 +213,18 @@ modalbox = (function() {
       this.clone.remove();
     }
     $(this.div).css('display', 'block');
-    $('.modal__content').html(this.div);
+    $(this.dom_modal_content).html(this.div);
     if (animation) {
-      this.prefixedEventListener($('.modal__content'), 'AnimationEnd', this.onShow);
-      $('.modal__content').addClass(this.options.show);
+      this.prefixedEventListener($(this.dom_modal_content), 'AnimationEnd', this.onShow);
+      $(this.dom_modal_content).addClass(this.options.show);
     }
     this.resize();
     this.options.onLoad();
   };
 
   modalbox.prototype.onShow = function(e) {
-    $('.modal__content').removeClass(this.options.show);
-    this.prefixedRemoveEventListener($('.modal__content'), 'AnimationEnd', this.onShow);
+    $(this.dom_modal_content).removeClass(this.options.show);
+    this.prefixedRemoveEventListener($(this.dom_modal_content), 'AnimationEnd', this.onShow);
   };
 
   modalbox.prototype.imageLoaded = function() {
@@ -224,8 +236,8 @@ modalbox = (function() {
 
   modalbox.prototype.resize = function() {
     var div, sizes, vertical;
-    if ($('.modal__box').length > 0) {
-      div = $('.modal__content');
+    if ($(this.dom_modal_box).length > 0) {
+      div = $(this.dom_modal_content);
       sizes = this.realSizes(div);
       if (sizes.height > sizes.window_h) {
         div.css('top', 0);

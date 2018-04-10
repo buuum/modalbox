@@ -81,7 +81,7 @@ modalbox = (function() {
       box.append(dialog);
       $('body').append(box);
     }
-    $(this.dom_modal_content).html('');
+    $(this.dom_modal_box).find(this.dom_modal_content).html('');
     $(this.dom_modal_box).find(this.dom_modal_overlay).removeClass('hide_buuummodal_opacity');
     if (this.options.hidebodyscroll) {
       $('html').css('overflow-y', 'hidden');
@@ -89,7 +89,7 @@ modalbox = (function() {
     }
     if (this.options.ajax) {
       loading.append(loader);
-      $(this.dom_modal_content).append(loading);
+      $(this.dom_modal_box).find(this.dom_modal_content).append(loading);
       $(this.dom_modal_box).find(this.dom_modal_overlay).addClass('show_buuummodal_opacity');
       this.openmodal();
     } else if (this.options.classload) {
@@ -127,7 +127,7 @@ modalbox = (function() {
     if (animation == null) {
       animation = false;
     }
-    $(this.dom_modal_content).html('');
+    $(this.dom_modal_box).find(this.dom_modal_content).html('');
     this.clone = $(html).clone();
     this.options.classcontainer = this.clone.attr('class');
     this.div = this.clone;
@@ -213,18 +213,18 @@ modalbox = (function() {
       this.clone.remove();
     }
     $(this.div).css('display', 'block');
-    $(this.dom_modal_content).html(this.div);
+    $(this.dom_modal_box).find(this.dom_modal_content).html(this.div);
     if (animation) {
-      this.prefixedEventListener($(this.dom_modal_content), 'AnimationEnd', this.onShow);
-      $(this.dom_modal_content).addClass(this.options.show);
+      this.prefixedEventListener($(this.dom_modal_box).find(this.dom_modal_content), 'AnimationEnd', this.onShow);
+      $(this.dom_modal_box).find(this.dom_modal_content).addClass(this.options.show);
     }
     this.resize();
     this.options.onLoad();
   };
 
   modalbox.prototype.onShow = function(e) {
-    $(this.dom_modal_content).removeClass(this.options.show);
-    this.prefixedRemoveEventListener($(this.dom_modal_content), 'AnimationEnd', this.onShow);
+    $(this.dom_modal_box).find(this.dom_modal_content).removeClass(this.options.show);
+    this.prefixedRemoveEventListener($(this.dom_modal_box).find(this.dom_modal_content), 'AnimationEnd', this.onShow);
   };
 
   modalbox.prototype.imageLoaded = function() {
@@ -237,7 +237,7 @@ modalbox = (function() {
   modalbox.prototype.resize = function() {
     var div, sizes, vertical;
     if ($(this.dom_modal_box).length > 0) {
-      div = $(this.dom_modal_content);
+      div = $(this.dom_modal_box).find(this.dom_modal_content);
       sizes = this.realSizes(div);
       if (sizes.height > sizes.window_h) {
         div.css('top', 0);

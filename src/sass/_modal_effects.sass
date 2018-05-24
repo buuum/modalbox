@@ -1,0 +1,116 @@
++keyframes(show_buuummodal_opacity)
+  0%
+    opacity: 0
+  100%
+    opacity: 0.9
+
+.show_buuummodal_opacity
+  +animation-name(show_buuummodal_opacity)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(hide_buuummodal_opacity)
+  0%
+    opacity: 0.9
+  100%
+    opacity: 0
+
+.hide_buuummodal_opacity
+  +animation-name(hide_buuummodal_opacity)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(show_buuummodal_scale)
+  0%
+    +transform(scale(0.7))
+    opacity: 0
+  100%
+    +transform(scale(1))
+    opacity: 1
+
+.show_buuummodal_scale
+  +animation-name(show_buuummodal_scale)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(hide_buuummodal_scale)
+  0%
+    +transform(scale(1))
+    opacity: 1
+  20%
+    +transform(scale(1.1))
+    opacity: 1
+  100%
+    +transform(scale(0.7))
+    opacity: 0
+
+.hide_buuummodal_scale
+  +animation-name(hide_buuummodal_scale)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(show_buuummodal_from_left)
+  0%
+    +transform(translate(-100vw, 0))
+  100%
+    +transform(translate(0, 0))
+
+.show_buuummodal_from_left
+  +animation-name(show_buuummodal_from_left)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(show_buuummodal_from_right)
+  0%
+    +transform(translate(100vw, 0))
+  100%
+    +transform(translate(0, 0))
+
+.show_buuummodal_from_right
+  +animation-name(show_buuummodal_from_right)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(hide_buuummodal_top)
+  0%
+    +transform(translate(0, 0))
+  20%
+    +transform(translate(0, 10vh))
+  100%
+    +transform(translate(0, -100vh))
+
+.hide_buuummodal_top
+  +animation-name(hide_buuummodal_top)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(show_buuummodal_from_top)
+  0%
+    +transform(translate(0, -100vh))
+  100%
+    +transform(translate(0, 0))
+
+.show_buuummodal_from_top
+  +animation-name(show_buuummodal_from_top)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)
+
++keyframes(show_buuummodal_from_bottom)
+  0%
+    +transform(translate(0, 100vh))
+  100%
+    +transform(translate(0, 0))
+
+.show_buuummodal_from_bottom
+  +animation-name(show_buuummodal_from_bottom)
+  +animation-duration(0.25s)
+  +animation-timing-function(ease)
+  +animation-direction(alternate)

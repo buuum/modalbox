@@ -109,7 +109,8 @@ class modalbox
 
     if $(@dom_modal_box).length <= 0
       dialog.append content
-      box.append overlay
+      if @options.closeoverlay
+        box.append overlay
       box.append dialog
       $('body').append box
 

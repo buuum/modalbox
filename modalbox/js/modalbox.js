@@ -82,7 +82,9 @@ modalbox = (function() {
     this.iniEvents();
     if ($(this.dom_modal_box).length <= 0) {
       dialog.append(content);
-      box.append(overlay);
+      if (this.options.closeoverlay) {
+        box.append(overlay);
+      }
       box.append(dialog);
       $('body').append(box);
     }

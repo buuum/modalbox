@@ -54,6 +54,7 @@ modalbox = (function() {
       position: "center",
       show: 'show_buuummodal_scale',
       close: 'hide_buuummodal_scale',
+      loader: null,
       onClose: function() {},
       onLoad: function() {}
     };
@@ -73,7 +74,11 @@ modalbox = (function() {
     content = $(content);
     content.css('z-index', 1000 + this.num + 1);
     loading = $('<div class="modal__loading" />');
-    loader = $('<div class="spinner spinner-bounce-middle" />');
+    if (this.options.loader) {
+      loader = this.options.loader;
+    } else {
+      loader = $('<div class="spinner spinner-bounce-middle" />');
+    }
     this.iniEvents();
     if ($(this.dom_modal_box).length <= 0) {
       dialog.append(content);

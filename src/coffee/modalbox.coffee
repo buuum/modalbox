@@ -16,7 +16,7 @@ class modalbox
     return
 
   close: ->
-    $length = @num-1
+    $length = @num - 1
     if @options.hidebodyscroll && $length == 0
       $('html').css 'overflow-y', @htmloverflowy
       $('body').removeClass 'buuummodal_open'
@@ -69,6 +69,7 @@ class modalbox
       position: "center"
       show: 'show_buuummodal_scale'
       close: 'hide_buuummodal_scale'
+      loader: null
       onClose: ->
         return
       onLoad: ->
@@ -99,7 +100,10 @@ class modalbox
     content.css 'z-index', 1000 + @num + 1
 
     loading = $('<div class="modal__loading" />')
-    loader = $('<div class="spinner spinner-bounce-middle" />')
+    if @options.loader
+      loader = @options.loader
+    else
+      loader = $('<div class="spinner spinner-bounce-middle" />')
 
     @iniEvents()
 
@@ -150,7 +154,7 @@ class modalbox
       else
         @start_modal()
       ## end loading images
-#      @start_modal()
+      #      @start_modal()
     else
       @clone = $(@options.htmlload).clone()
       @options.classcontainer = @clone.attr('class')

@@ -98,6 +98,9 @@ modalbox = (function() {
             $(el).one('load', function() {
               _this.imageLoaded();
             });
+            $(el).one('error', function() {
+              _this.imageLoaded();
+            });
           };
         })(this));
       } else {
@@ -179,6 +182,9 @@ modalbox = (function() {
             if (_this.total_imgs > 0) {
               $.each(_this.clone.find('img'), function(i, el) {
                 $(el).one('load', function() {
+                  _this.imageLoaded();
+                });
+                $(el).one('error', function() {
                   _this.imageLoaded();
                 });
               });

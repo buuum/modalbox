@@ -4,7 +4,7 @@
   "description": "Simple modal box",
   "main": [
     "modalbox/css/main.css",
-    "modalbox/js/modalbox.min.js"
+    "modalbox/js/modalbox.js"
   ],
   "keywords": [
     "modalbox",

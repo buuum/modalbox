@@ -151,6 +151,9 @@ class modalbox
           $(el).one 'load', =>
             @imageLoaded()
             return
+          $(el).one 'error', =>
+            @imageLoaded()
+            return
           return
       else
         @start_modal()
@@ -227,6 +230,9 @@ class modalbox
           if @total_imgs > 0
             $.each @clone.find('img'), (i, el) =>
               $(el).one 'load', =>
+                @imageLoaded()
+                return
+              $(el).one 'error', =>
                 @imageLoaded()
                 return
               return
